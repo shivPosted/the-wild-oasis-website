@@ -1,7 +1,5 @@
 import "@/app/_styles/globals.css";
 import React from "react";
-import Navigation from "./_components/Navigation";
-import Logo from "./_components/Logo";
 import { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
 import Header from "./_components/Header";
