@@ -1,6 +1,7 @@
+import "@/app/_styles/globals.css";
 import React from "react";
-import Navigation from "./components/Navigation";
-import Logo from "./components/Logo";
+import Navigation from "./_components/Navigation";
+import Logo from "./_components/Logo";
 
 export default function RootLayout({
   children,
@@ -9,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-primary-950">
         <header>
           <Logo />
           <Navigation />
