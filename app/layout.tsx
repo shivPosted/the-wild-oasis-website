@@ -4,6 +4,7 @@ import Navigation from "./_components/Navigation";
 import Logo from "./_components/Logo";
 import { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
+import Header from "./_components/Header";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -27,13 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${josefin.className} bg-primary-950 text-accent-50`}>
-        <header>
-          <Logo />
-          <Navigation />
-        </header>
-        <main>{children}</main>
-        <footer>Copyrigh 2025 wild-oasis</footer>
+      <body
+        className={`${josefin.className} bg-primary-950 text-primary-100 antialiased min-h-screen w-full flex flex-col`}
+      >
+        <Header />
+        <div className="px-8 py-12">
+          <main className="max-w-7xl mx-auto ">{children}</main>
+        </div>
       </body>
     </html>
   );
