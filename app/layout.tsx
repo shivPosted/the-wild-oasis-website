@@ -2,7 +2,7 @@ import "@/app/_styles/globals.css";
 import React from "react";
 import { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
-import Header from "./_components/Header";
+import Header from "@/app/_components/Header";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${josefin.className} bg-primary-950 text-primary-100 antialiased min-h-screen w-full flex flex-col`}
+        className={`${josefin.className} bg-primary-950 text-primary-100 antialiased min-h-screen w-full flex flex-col relative`}
       >
         <Header />
         <div className="px-8 py-12">
