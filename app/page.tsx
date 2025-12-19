@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import bg from "@/public/bg-new.png";
+import bg from "@/public/bg-new-dark-upscale.png";
 
 export default function Page() {
   return (
@@ -11,7 +11,7 @@ export default function Page() {
         fill
         placeholder="blur"
         alt="Mountains and forests with two cabins"
-        className="object-cover bg-top"
+        className="object-fit bg-top"
       />
 
       <div className="relative z-10 text-center">
