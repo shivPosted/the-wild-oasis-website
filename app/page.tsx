@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import bg from "@/public/bg-new-dark-upscale.png";
+import { getCabins } from "./_lib/data-service";
 
 export default function Page() {
+  getCabins().then((data) => console.log(data));
+
   return (
     <main className="mt-24">
       <Image
