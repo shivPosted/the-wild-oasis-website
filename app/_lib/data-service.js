@@ -16,3 +16,19 @@ export async function getCabins() {
     console.error(error);
   }
 }
+
+export async function getCabinData(id) {
+  try {
+    const { data, error } = await supabase
+      .from("the_oasis_cabins")
+      .select(
+        "id, name, maxCapacity, regularPrice, discount, image, description",
+      )
+      .eq("id", id)
+      .single();
+    if (error) throw new Error(`Could not load cabin data with id-${id}`);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
