@@ -1,4 +1,5 @@
 import { supabase } from "@/app/_lib/supabse";
+import { notFound } from "next/navigation";
 
 export async function getCountries() {
   return [];
@@ -30,5 +31,6 @@ export async function getCabinData(id) {
     return data;
   } catch (error) {
     console.error(error);
+    notFound(); //NOTE: how to manually forward to not-found page
   }
 }

@@ -1,15 +1,28 @@
-import { getCabinData } from "@/app/_lib/data-service";
+import { getCabinData, getCabins } from "@/app/_lib/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import { Metadata } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
 
-export async function generateMetadata({ params }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { cabinId: string };
+}): Promise<Metadata> {
   const { name } = await getCabinData(params.cabinId);
 
   return {
     title: `Cabin ${name}`,
   };
+}
+
+//NOTE: for static route genreation using generateStaticParams for converting finite set of routes/ids to static routes
+export async function generateStaticParams() {
+  //this function returns an array of objects with same parmas keyname and value--> string the object
+
+  const cabins = await getCabins();
+  const ids = cabins?.map((cabin) => ({ cabinId: String(cabin.id) })); //value should be string
+  return ids;
 }
 
 export default async function Page({ params }: { params: Params }) {
