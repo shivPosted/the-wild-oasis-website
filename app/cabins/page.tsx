@@ -6,6 +6,9 @@ export const metadata = {
   title: "Cabins",
 };
 
+//NOTE:caching the entire cabins route to revalidate/refetch the data after 3600 seconds, we can also use noStore function for component level cache management
+export const revalidate = 3600;
+
 export default async function Page() {
   return (
     <div>
