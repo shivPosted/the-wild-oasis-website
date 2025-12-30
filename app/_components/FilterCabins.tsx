@@ -10,7 +10,7 @@ function FilterCabins() {
   function handleFilter(filter: string) {
     const params = new URLSearchParams(searchParams);
     params.set("capacity", filter);
-    router.replace(`${pathName}?${params.toString()}`);
+    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
   return (

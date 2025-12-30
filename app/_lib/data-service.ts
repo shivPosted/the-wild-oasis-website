@@ -2,7 +2,18 @@ import { supabase } from "@/app/_lib/supabse";
 import { notFound } from "next/navigation";
 
 export async function getCountries() {
-  return [];
+  try {
+    const res = await fetch(
+      "https://restcountries.com/v2/all?fields=name,flag",
+    );
+    if (!res.ok) throw new Error("Could not fetch rest countries-api data");
+    const data:
+      | { name: string; flag: string; indpendent: boolean }[]
+      | undefined = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export async function getCabins() {
