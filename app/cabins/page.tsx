@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
+import FilterCabins from "../_components/FilterCabins";
 
 export const metadata = {
   title: "Cabins",
@@ -9,7 +10,9 @@ export const metadata = {
 //NOTE:caching the entire cabins route to revalidate/refetch the data after 3600 seconds, we can also use noStore function for component level cache management
 export const revalidate = 3600;
 
-export default async function Page() {
+export default async function Page({ searchParams }) {
+  const filter = searchParams?.capacity ?? "all";
+
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -23,8 +26,14 @@ export default async function Page() {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
-      <Suspense fallback={<Spinner />}>
-        <CabinList />
+      <div className="flex mb-4">
+        <FilterCabins />
+      </div>
+
+      <Suspense fallback={<Spinner />} key={filter}>
+        {" "}
+        {/*NOTE: suspense uses transition behind the scenes so we have to ue a unique key for it to work whenever that key changes the suspense will kick off again*/}
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );
