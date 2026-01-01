@@ -1,5 +1,6 @@
 import { supabase } from "@/app/_lib/supabse";
 import { notFound } from "next/navigation";
+import Error from "../error";
 
 export async function getCountries() {
   try {
@@ -43,5 +44,38 @@ export async function getCabinData(id) {
   } catch (error) {
     console.error(error);
     notFound(); //NOTE: how to manually forward to not-found page
+  }
+}
+
+export async function getBookedDates(cabinId) {
+  let today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+
+  try {
+    const { data, error } = await supabase
+      .from("the_oasis_bookings")
+      .select("*")
+      .eq("cabinId", cabinId)
+      .or(`startedAt.gte.${today.toISOString()},status.eq.checked-in`);
+
+    if (error)
+      throw new Error(`Could not get the booked dates for cabin-${cabinId}`);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getSettings() {
+  try {
+    const { data, error } = await supabase
+      .from("the_oasis_settings")
+      .select("*")
+      .single();
+    if (error)
+      throw new Error("Could not fetch the settings from the supabase table");
+    return data;
+  } catch (error) {
+    console.error(error);
   }
 }
