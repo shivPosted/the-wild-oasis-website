@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
 import FilterCabins from "../_components/FilterCabins";
+import ReservationReminder from "../_components/ReservationReminder";
 
 export const metadata = {
   title: "Cabins",
@@ -34,6 +35,7 @@ export default async function Page({ searchParams }) {
         {" "}
         {/*NOTE: suspense uses transition behind the scenes so we have to ue a unique key for it to work whenever that key changes the suspense will kick off again*/}
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );
