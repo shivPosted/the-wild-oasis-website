@@ -79,3 +79,27 @@ export async function getSettings() {
     console.error(error);
   }
 }
+
+export async function getGuest(email) {
+  try {
+    const { data, error } = await supabase
+      .from("the_oasis_guests")
+      .select("*")
+      .eq("email", email)
+      .single();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function createGuest(newGuest) {
+  try {
+    const { error } = await supabase
+      .from("the_oasis_guests")
+      .insert([{ ...newGuest }]);
+    if (error) throw new Error("Could not create that user");
+  } catch (error) {
+    console.error(error);
+  }
+}
